@@ -1,6 +1,6 @@
 {% set name = "ftfy" %}
-{% set version = "4.4.2" %}
-{% set sha256sum = "0d82c3c7550d030c0b0e833f9b4d2a3c54873f7a934eec9913694977e3fb165f" %}
+{% set version = "4.4.3" %}
+{% set sha256sum = "3c0066db64a98436e751e56414f03f1cdea54f29364c0632c141c36cca6a5d94" %}
 
 package:
   name: {{ name }}
@@ -32,6 +32,7 @@ requirements:
 test:
   imports:
     - ftfy
+    - ftfy.bad_codecs
     - ftfy.build_data
     - ftfy.chardata
     - ftfy.cli
@@ -52,3 +53,4 @@ about:
 extra:
   recipe-maintainers:
     - rolando
+    - nehaljwani
