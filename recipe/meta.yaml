@@ -1,6 +1,6 @@
 {% set name = "ftfy" %}
-{% set version = "5.1.1" %}
-{% set sha256sum = "67a29a2fad5f72aec2d8a0a7084e4f499ed040455133ee96b1c458609fc29e78" %}
+{% set version = "5.2.0" %}
+{% set sha256 = "b9f84a1437f68ad0bb964fd9da9f6b88d090113ec9e78f290f6d6d0221468e38" %}
 
 package:
   name: {{ name }}
@@ -9,7 +9,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256sum }}
+  sha256: {{ sha256 }}
 
 build:
   number: 0
