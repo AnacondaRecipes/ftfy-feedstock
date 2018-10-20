@@ -1,6 +1,6 @@
 {% set name = "ftfy" %}
-{% set version = "5.4.1" %}
-{% set sha256sum = "619e68f9844cadd03e0d835e9b6790b2399357100c57fddae14d93a8de81e114" %}
+{% set version = "5.5.0" %}
+{% set sha256sum = "525ea45a871f52ddb170e66b01f35f1b3022995016c81efa305e628937b85443" %}
 
 package:
   name: {{ name }}
@@ -14,7 +14,8 @@ source:
 build:
   number: 0
   script: python setup.py install --single-version-externally-managed --record=record.txt
-  skip: True  # [py2k]
+  # Don't skip py37 for >=5.5.1
+  skip: True  # [py2k or py>36]
   entry_points:
     - ftfy = ftfy.cli:main
 
