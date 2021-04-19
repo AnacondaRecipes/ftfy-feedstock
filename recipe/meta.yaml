@@ -22,7 +22,7 @@ requirements:
     - python >=3.6
     - pip
   run:
-    - python >=3.6
+    - python >=3.6,<3.9
     # Required for loading package data via `pkg_resources` module.
     - setuptools
     - wcwidth
@@ -33,9 +33,9 @@ test:
   source_files:
     - tests
   commands:
-    - py.test --deselect tests/test_cli.py  # [win]
-    # CLI tests fail on windows.
     - py.test  # [not win]
+    # CLI tests fail on windows.
+    - pytest -k "not (test_basic and test_guess_bytes and test_alternate_encoding and test_stdin)"  # [win]
 
 about:
   home: https://github.com/LuminosoInsight/python-ftfy/
@@ -48,3 +48,4 @@ about:
 extra:
   recipe-maintainers:
     - rmax
+    - FernandezMathieu
