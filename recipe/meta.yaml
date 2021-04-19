@@ -35,7 +35,7 @@ test:
   commands:
     - py.test  # [not win]
     # CLI tests fail on windows.
-    - pytest -k "not (basic and guess_bytes and alternate_encoding and stdin)"  # [win]
+    - py.test --ignore=test_cl.py  # [win]
 
 about:
   home: https://github.com/LuminosoInsight/python-ftfy/
