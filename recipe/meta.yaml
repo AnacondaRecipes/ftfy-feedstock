@@ -33,9 +33,9 @@ test:
   source_files:
     - tests
   commands:
-    - py.test  # [unix]
     # CLI tests fail on windows.
     - py.test --deselect tests/test_cli.py  # [win]
+    - py.test  # [unix]
 
 about:
   home: https://github.com/LuminosoInsight/python-ftfy/
