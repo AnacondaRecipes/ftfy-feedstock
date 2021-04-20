@@ -33,7 +33,7 @@ test:
   source_files:
     - tests
   commands:
-    - py.test  # [not win]
+    - py.test  # [unix]
     # CLI tests fail on windows.
     - py.test --deselect tests/test_cli.py  # [win]
 
