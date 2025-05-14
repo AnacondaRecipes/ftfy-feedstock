@@ -1,5 +1,5 @@
 {% set name = "ftfy" %}
-{% set version = "5.8" %}
+{% set version = "6.3.1" %}
 
 package:
   name: {{ name }}
@@ -8,42 +8,50 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 51c7767f8c4b47d291fcef30b9625fb5341c06a31e6a3b627039c706c42f3720
+  sha256: 9b3c3d90f84fb267fe64d375a07b7f8912d817cf86009ae134aa03e1819506ec
 
 build:
+  skip: True  # [py<39]
   number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
-  noarch: python
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
   entry_points:
     - ftfy = ftfy.cli:main
 
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
+    - hatchling
   run:
-    - python >=3.6
-    # Required for loading package data via `pkg_resources` module.
-    - setuptools
+    - python
     - wcwidth
 
 test:
-  requires:
-    - pytest
   source_files:
     - tests
+  imports:
+    - ftfy
+    - ftfy.bad_codecs.utf8_variants
+    - ftfy.chardata
+    - ftfy.fixes
+  requires:
+    - pytest
+    - pip
   commands:
-    - py.test --deselect tests/test_cli.py  # [win]
-    # CLI tests fail on windows.
-    - py.test  # [not win]
+    - pip check
+    - pytest -v tests
 
 about:
-  home: https://github.com/LuminosoInsight/python-ftfy/
-  license: MIT
+  home: https://ftfy.readthedocs.io
+  license: Apache-2.0
   license_file: LICENSE.txt
-  summary: Fixes some problems with Unicode text after the fact
-  dev_url: https://github.com/LuminosoInsight/python-ftfy
-  doc_url: http://ftfy.readthedocs.io/
+  license_family: Apache
+  summary: Fixes mojibake and other glitches in Unicode text, after the fact
+  description: |
+    The goal of ftfy is to take in bad Unicode and output good
+    Unicode, for use in your Unicode-aware code.
+  dev_url: https://github.com/rspeer/python-ftfy
+  doc_url: https://ftfy.readthedocs.io
 
 extra:
   recipe-maintainers:
