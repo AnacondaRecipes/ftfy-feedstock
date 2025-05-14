@@ -26,6 +26,12 @@ requirements:
     - python
     - wcwidth
 
+# The cli tests expect a Unicode-capable output stream with the
+# message in ENCODE_ERROR_TEXT_WINDOWS (ftfy/cli.py):
+# ftfy error:
+# Unfortunately, this output stream does not support Unicode.
+{% set tests_to_ignore = "--ignore=tests/test_cli.py" %}  # [win]
+
 test:
   source_files:
     - tests
@@ -39,7 +45,8 @@ test:
     - pip
   commands:
     - pip check
-    - pytest -v tests
+    - pytest -v tests                       # [not win]
+    - pytest -v tests {{ tests_to_ignore }} # [win]
 
 about:
   home: https://ftfy.readthedocs.io
